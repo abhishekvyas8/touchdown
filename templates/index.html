@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>touchdown</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+            .fixtures {
+            border-right: 1px solid rgb(238,73,73);
+            width: 20%;
+            float: left;
+            background-color: rgb(0,46,70);
+            color: white;
+            }
+
+            .fixtures h3, .stats h3{
+                color: white;
+                text-transform: uppercase;
+                font-size: 1.5rem;
+                font-family: Oxygen;
+                font-weight: 300;
+                letter-spacing: 3px;
+                margin: 20px 2rem;
+            }
+
+            .bet h3{
+                color:black;
+                text-transform: uppercase;
+                font-size: 1.5rem;
+                font-family: Oxygen;
+                font-weight: 300;
+                letter-spacing: 3px;
+                margin: 20px 2rem;
+            }
+
+            .profile_page h1, .profile_page h2, .col-50 form h3{
+                font-size: 1.5rem;
+                font-family: Oxygen;
+                font-weight: 300;
+                letter-spacing: 3px;
+                margin: 20px 2rem;
+            }
+
+            .live_games{
+                width: auto;
+                height: 350px;
+            }
+
+            .bet{
+                width: 55%
+            }
+
+            .profile{
+                height: 85px;
+            }
+
+
+            .live_data{
+                height: 420px;
+            }
+
+            .stats{
+                border-left: 1px solid rgb(238,73,73);
+                float: right;
+                width: 25%;
+                background-color: rgb(0,46,70)
+            }
+
+            .circle{
+                border-radius: 50%;
+                background-color: #999;
+                height:75px;
+                width: 75px;
+                display: inline-block;
+            }
+
+            .txt{
+                border: none;
+                font-size: 150%;
+                font-family: Fauna One;
+                color: black;
+                font-weight: 200;
+                width: 50%;
+                outline: #999;
+                border: 1px solid #eee
+            }
+
+            .top{
+                border-radius: 50%;
+                display: block;
+                height: 200px;
+                width: 200px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 50px;
+                clear: both;
+            }
+            .col-50{
+                font-family: Arial;
+                font-size: 17px;
+                padding: 8px;
+                -ms-flex: 50%; /* IE10 */
+                flex: 50%;
+                padding: 0 16px;
+                border: 1px solid #eee;
+                width: 40%;
+            }
+
+            .col-50 input[type=text] {
+                width: 100%;
+                margin-bottom: 20px;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+
+            .login-form-1, .registration-form-1, .col-50{
+            margin-top: 150px;
+        }
+
+        .txt2{
+            border: 1px solid black;
+            font-size: 150%;
+            font-family: Fauna One;
+            color: black;
+            font-weight: 200;
+            width: 20%;
+            outline: #999;
+        }
+
+        u{
+            cursor: pointer;
+        }
+
+        .col-50{
+            font-family: Arial;
+            font-size: 17px;
+            padding: 8px;
+            -ms-flex: 50%; /* IE10 */
+            flex: 50%;
+            padding: 0 16px;
+            border: 1px solid #eee;
+            width: 40%;
+        }
+
+        .col-50 input[type=text] {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .total_list{
+            border-top: 1px solid rgb(238,73,73);
+            overflow-y: scroll;
+            height: calc(100vh - 72px);
+            list-style: none;
+            margin-top: 1em;
+            padding: 0;
+            width: 100%;
+            color:#999;
+        }
+
+        .list_game{
+            text-align: center;
+            font-size: 120%;
+            font-family: Helvetica, sans-serif;
+            text-transform: uppercase;
+            margin-top:20px;
+            margin-bottom: 10px; 
+            cursor: pointer;
+        }
+
+        .logo{
+            height: 100px;
+            width: 100px;
+        }
+
+        .team_logo1, .team_logo2{
+            height: 80px;
+            width: 80px;
+        }
+
+        .team_logo1{
+            margin-right:140px
+        }
+
+        .team_logo2{
+            margin-left:140px
+        }
+
+        .logo_text p{
+            display: inline-block;
+            font-size: 250%;
+            font-weight:bold
+        }
+
+        .para_left{
+            margin-right:120px;
+        }
+
+        .para_right{
+            margin-left:90px;
+        }
+
+        .para_middle{
+            margin-right:20px;
+        }
+
+        .win-loss p{
+            display: inline-block;
+            font-size: 100%;
+            font-weight:bold;
+        }
+
+        .stat1{
+            margin-right:50px;
+        }
+
+        .stat2{
+            margin-right:200px;
+        }
+
+        .stat3{
+            margin-right:50px;
+        }
+
+        .stat1n{
+            margin-right:85px;
+        }
+
+        .stat2n{
+            margin-right:225px;
+        }
+
+        .stat3n{
+            margin-right:80px;
+        }
+
+        .bet_section{
+            float: left;
+            width: 50%;
+        }
+        
+        .friend_section{
+            float:right;
+            width: 50%;
+        }
+
+        .txt3{
+            border: 1px solid #999;
+        }
+
+        .bet_now{
+            margin: 5px;
+            border: 1px solid rgb(238,73,73);
+            padding: 7px;
+            width: 60%;
+            border-radius: 5%;
+        }
+
+        .frands{
+            border-radius: 50%;
+            width: 35%;
+            height: 35%;
+        }
+
+        .stream{
+            border-radius: 50%;
+            width: 20%
+        }
+
+        .hi{
+            color: #999;
+        }
+
+        hr{
+            border-color: rgb(238,73,73)
+        }
+        </style>
+    </head>
+
+    <body>
+            <center>
+                    <div class="login-form-1" style = "display:block" id = "login">
+                        <form id="login-form">
+                            <h1>Log In</h1>
+                            <input type = "text" class = "txt2" name = "email" placeholder="email">
+                            <br>
+                            <br>
+                            
+                            <input type = "password" class = "txt2" name = "password" placeholder = "password">
+                            <br>
+                            <br>
+                            <button type = "submit"  class = "btn btn-secondary btn-lg"> Log In </button> 
+                        </form>
+                        <br>
+                        <p> Don't have an account? <u id = "swap"> Register here </u> <p> 
+                    </div>
+        
+                    <div class="registration-form-1" id = "register" stye = "display: none">
+                        <form id="registration-form">
+                            <h1>Register</h1>
+                            <input type = "text" class = "txt2" name = "name" placeholder="Full Name" required>
+                            <br>
+                            <br>
+                                
+                            <input type = "email" class = "txt2" name = "email" placeholder = "Email" required>
+                            <br>
+                            <br>
+        
+                            <input type = "password" class = "txt2" name = "email" placeholder = "Enter Password" required>
+                            <br>
+                            <br>
+        
+                            <input type = "password" class = "txt2" name = "email" placeholder = "Confirm Password" required>
+                            <br>
+                            <br>
+                            <button type = "submit"  class = "btn btn-secondary btn-lg"> Create Account </button> 
+                        </form>
+                    </div>
+        
+                    <div class="col-50" id = "card-info" style = "display:none">
+                        <form id = "card_details">
+                            <h3>Payment Info</h3>
+                            <input type="text" id="ccnum" name="cardnumber" placeholder="Card Number" required>
+                            <input type="text" id="expmonth" name="expmonth" placeholder="Exp. Month" required>
+                            <input type="text" id="expyear" name="expyear" placeholder="Exp. Year" required>
+                            <input type="text" id="cvv" name="cvv" placeholder="CVV" required>
+                            <button type = "submit" class="btn btn-secondary"> Submit </button>
+                            
+                        </form>
+                    </div>
+        
+                </center>
+
+        <div class = "main" id = "main" style = "display: none; height: 100vh" >
+            <div class = "fixtures">
+                <div class = "live_games" id = "today">
+                    <center>
+                        <h3>Today's Games</h3>
+                    </center>
+                </div>
+            </div>
+            <div class = "bet" style = "background-color: rgb(245,245,220);" >
+                
+                <div class = "live_data" style = "margin-top:15px;">
+                    <center>
+                        <img src = "touchdown_logo.png" class = "logo"/>
+                    </center>
+                    
+                    
+                    <br>
+                    <br>
+                    <hr>
+                    <div class = "center_tab" id = "center_tab">
+                        <center>
+                            <div class = "populate" id = "populate"></div>
+                        </center>
+                    </div>
+
+                    <center>
+                        <div class = "win-loss" id = "win-loss"></div>
+                    </center>
+                </div>
+        
+                <br>
+                <br>
+                <br>
+                <hr>
+                <div class = "bets" style = "display: flex">
+                        <div class = "bet_section">
+                            <center> 
+                                <h3>Make Your Bet</h3> 
+
+                            
+                                <form id = "bet_now" class = "bet_now">
+                                    Split:    <input type = "number" class = "txt" style = "width : 23%" name = "odds" >
+                                    :<input type= "number" class = "txt" name = "odds" style = "width : 23%">
+                                    <br>
+                                    <br>
+                                    Amount: <input type = "number" class = "txt" style = "width : 44%">
+                                    <br>
+                                    <br>
+                                    Team: <select id = "dropdown">
+                                            <option id = "option1"></option>
+                                            <option id = "option2"></option>
+                                        </select>
+                                    <br>
+                                    <br>
+                                    <button type = "submit"  class = "btn btn-secondary"> Place Bet </button> 
+                                </form>
+                            
+                             </center>
+
+                        </div>
+                        <div class = "friend_section">
+                            <center> <h3>Choose Friends</h3> </center>
+                            <div class = "bet_now" id = "radios"> 
+                                <input type = "radio" name = "friend"  class = "txt" value = "Ross">Ross
+                                <br>
+                                <input type = "radio" name = "friend"  class = "txt" value = "Rachel">Rachel
+                                <br>
+                                <input type = "radio" name = "friend" class = "txt" value = "Monica">Monica
+                                <!--<input type = "radio" value = "Joey">Joey</option>
+                                <input type = "radio" value = "Rachel">Rachel</option>
+                                <input type = "radio" value = "Chandler">Chandler</option> -->
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class = "stats">
+                <div class = "profile" style = "margin-top :10px">
+                    <center>
+                        <span class = "circle" id = "circle"><img src = "perdu.jpeg" id = "circle" class = "circle"></span>
+                    </center>                   
+                </div>
+                <hr>
+
+                <div class = "prev_stats" style = "padding : 15px; border-radius:4%;">
+                    <center>
+                        <h3 >Betting Stats</h3>
+                    </center>
+
+                    <p class = "hi" style = "display: inline;font-weight:bold; font-size:110%; margin-right : 50px; margin-left : 60px">Team 1</p>
+                    <p class = "hi" style = "display: inline;font-weight:bold; font-size:110%;">Team 2</p>
+
+                    <h5 class = "hi" style = "padding : 10px;">Odds:</h5>
+                        <p class = "hi" style = "display: inline;font-weight:bold; font-size:110%; margin-right : 60px; margin-left : 80px">60</p>
+                        <p class = "hi" style = "display: inline;font-weight:bold; font-size:110%; margin-left: 40px;">40</p>
+                        
+                    <h5 class = "hi" style = "padding : 20px;">Money Line:</h5>
+                        <p class = "hi" style = "display: inline;font-weight:bold; font-size:110%; margin-right : 60px; margin-left : 80px">-180</p>
+                        <p class = "hi" style = "display: inline;font-weight:bold; font-size:110%; margin-left: 20px">+120</p>
+
+                    <h5 class = "hi" style = "padding : 10px;">Spread:</h5>
+                        <p class = "hi" style = "display: inline;font-weight:bold; font-size:110%; margin-right : 60px; margin-left : 80px">+6.5</p>
+                        <p class = "hi" style = "display: inline;font-weight:bold; font-size:110%; margin-left: 20px">-6.5</p>
+                    
+                </div>
+
+                <hr>
+                <div class = "bet_stream">
+                    <center>
+                        <h3>Bet Stream</h3>
+                        <hr>
+
+                        <div><span class = "hi"><img  class = "stream" src = "xxx.jpg"> XXX bet on VAND VS. SC</span></div>
+                        <hr>
+
+                        <div><span class = "hi"><img  class = "stream" src = "baller.jpg"> User3 bet on WAKE VS. ND</span></div>
+                        <hr>
+
+                        <div><span class = "hi"><img  class = "stream" src = "Rachel.jpeg"> Rachel bet on IND VS. MST</span></div>
+                        <hr>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+        <div class = "profile_page" id = "profile_page" style = "display: none">
+            <img class = "top" src="default_user.png" alt="John" >
+            <center>
+                <h1 id = "name"></h1>
+            </center>
+
+            <center>
+                <h2 id = "email"></h2>
+            </center>
+
+        </div>
+        
+        <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+
+        <script>
+            // Initialize Firebase
+            const config = {
+                apiKey: "AIzaSyARSBxwifCThlRIHQ1bDPa5h_k6e-h9VF0",
+                authDomain: "brobet-221407.firebaseapp.com",
+                databaseURL: "https://brobet-221407.firebaseio.com",
+                projectId: "brobet-221407",
+                storageBucket: "brobet-221407.appspot.com",
+                messagingSenderId: "890326864452"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <script>
+            const firebase_ref = firebase.database().ref()
+
+            swap = document.getElementById("swap")
+            login_form = document.getElementById("login")
+            register_form = document.getElementById("register")
+
+            function fill_games(){
+                const list = document.createElement("ul")
+                curr_games = []
+                today = document.getElementById("today")
+                firebase_ref.on("value", function(snap) {
+                    games = snap.val()["TodaysGame"]
+                
+                    for(var key in games){
+                        const item = document.createElement("li")
+                        item.classList.add("list_game")
+                        item.textContent = games[key]
+                        list.appendChild(item)
+                        curr_games.push({"key": key, "game":games[key]})
+
+                        item.addEventListener("click", (ev) => {
+                            populate_center(ev)
+                        })
+                    }
+                })
+                list.classList.add("total_list")
+                today.appendChild(list)
+            }
+            
+            const div_stat = document.getElementById("win-loss")
+            fill_games()
+
+            const option1 = document.getElementById("option1")
+            const option2 = document.getElementById("option2")
+
+
+            function populate_center(ev){
+                div_stat.innerHTML = ""
+                populate.innerHTML = ""
+                populate = document.getElementById("populate")
+                const span1 = document.createElement("span")
+                const img1 = document.createElement("img")
+                const img2 = document.createElement("img")
+                img1.classList.add("team_logo1")
+                img1.src = "ohiostate.png"
+                img2.classList.add("team_logo2")
+                img2.src = "michigan.png"
+                span1.appendChild(img1)
+                span1.appendChild(img2)
+                populate.appendChild(span1)
+                
+                const div1 = document.createElement("div")
+                const span2 = document.createElement("span")
+                const head1 = document.createElement("p")
+                const head2 = document.createElement("p")
+                const head3 = document.createElement("p")
+                
+                for(var i in curr_games){
+                    if (curr_games[i]["game"] === ev.target.textContent){
+                        gameId = curr_games[i]["key"]
+                    }
+                }
+                text = ev.target.textContent.split(" ")
+                head1.textContent = text[0] 
+                head2.textContent = text[1]
+                head3.textContent = text[2]
+
+                option1.textContent = text[0]
+                option1.setAttribute("value", text[0])
+                option2.textContent = text[2]
+                option2.setAttribute("value", text[2])
+
+                div1.appendChild(head1)
+                div1.appendChild(head2)
+                div1.appendChild(head3)
+                head1.classList.add("para_left")
+                head3.classList.add("para_right")
+                head2.classList.add("para_middle")
+                div1.classList.add("logo_text")
+
+                const br = document.createElement("br")
+                populate.appendChild(br)
+                populate.appendChild(br)
+                populate.appendChild(div1)
+
+                addStats()
+
+                //populate.textContent = ev.target.textContent
+            }
+
+            function addStats(){
+                // const div_stat = document.getElementById("win-loss")
+                header = document.createElement("h3")
+                header.textContent = "Season Stats"
+                div_stat.append(header)
+
+                const win1 = document.createElement("p")
+                const loss1 = document.createElement("p")
+                const win2 = document.createElement("p")
+                const loss2 = document.createElement("p")
+
+                win1.classList.add("stat1")
+                win1.textContent = "Wins"
+                loss1.classList.add("stat2")
+                loss1.textContent = "Losses"
+                win2.classList.add("stat3")
+                win2.textContent = "Wins"
+                loss2.classList.add("stat4")
+                loss2.textContent = "Losses"
+
+                div_stat.appendChild(win1)
+                div_stat.appendChild(loss1)
+                div_stat.appendChild(win2)
+                div_stat.appendChild(loss2)
+
+                const br = document.createElement("br")
+                div_stat.appendChild(br)
+
+                const num1 = document.createElement("p")
+                const num2 = document.createElement("p")
+                const num3 = document.createElement("p")
+                const num4 = document.createElement("p")
+
+                num1.classList.add("stat1n")
+                num1.textContent = "10"
+                num2.classList.add("stat2n")
+                num2.textContent = "12"
+                num3.classList.add("stat3n")
+                num3.textContent = "15"
+                num4.classList.add("stat4n")
+                num4.textContent = "6"
+
+                div_stat.appendChild(num1)
+                div_stat.appendChild(num2)
+                div_stat.appendChild(num3)
+                div_stat.appendChild(num4)
+
+                addWinLoss()
+            }
+
+            let user = ""
+            let email = ""
+            let name = ""
+
+            register_form.style.display = "none"
+
+            function addWinLoss(){
+                firebase_ref.on("value", function(snap) {
+                    console.log(gameId)
+                    stats = snap.val()["Group"]["PreGameOddsByWeek"]
+                    console.log(stats)
+                    /*for(var key in games){
+                        const item = document.createElement("li")
+                        item.classList.add("list_game")
+                        item.textContent = games[key]
+                        list.appendChild(item)
+                        curr_games.push({"key": key, "game":games[key]})
+
+                        item.addEventListener("click", (ev) => {
+                            populate_center(ev)
+                        })
+                    }*/
+                })
+                
+            }
+
+
+            card_info = document.getElementById("card-info")
+            card_details = document.getElementById("card_details")
+
+            register = document.getElementById("registration-form")
+            login = document.getElementById("login-form")
+            
+
+            profile = document.getElementById("circle")
+            main_page = document.getElementById("main")
+            profile_page = document.getElementById("profile_page")
+            place_bet = document.getElementById("bet_now")
+            card = document.getElementById("card_details")
+
+            profile.addEventListener("click" , (ev) => {
+                main_page.style.display = "none"
+                profile_page.style.display = "block"
+                
+                name_input = document.getElementById("name")
+                name_input.textContent = name
+
+                email_input = document.getElementById("email")
+                email_input.textContent = email
+            })
+
+            place_bet.addEventListener("submit", (ev) => {
+                ev.preventDefault()
+                ratio1 = ev.target.childNodes[1].value
+                ratio2 = ev.target.childNodes[3].value
+                amount = ev.target.childNodes[9].value
+
+                const e = document.getElementById("dropdown")
+                team = e.options[e.selectedIndex].value
+
+                if(option1.textContent !== team){
+                    team2 = option1.textContent
+                }
+                else{
+                    team2 = option2.textContent
+                }
+
+                cost = ((ratio2/ratio1)*amount).toFixed(2)
+
+                id = user + team
+
+                alert(`If you win, you get $${cost}. Goodluck!`)
+
+
+                firebase_ref.child("Bets").child(id).child("User1").set(user)
+                firebase_ref.child("Bets").child(id).child("User2").set("Ross")
+                firebase_ref.child("Bets").child(id).child("Team1").set(team)
+                firebase_ref.child("Bets").child(id).child("Team2").set(team2)
+                firebase_ref.child("Bets").child(id).child("Ratio1").set(ratio1)
+                firebase_ref.child("Bets").child(id).child("Ratio2").set(ratio2)
+                firebase_ref.child("Bets").child(id).child("Amount").set(amount)
+                firebase_ref.child("Bets").child(id).child("ID").set(gameId)
+                firebase_ref.child("Bets").child(id).child("Winner").set(user)
+            })
+
+            swap.addEventListener("click", (ev)=>{
+                login_form.style.display = "none";
+                register_form.style.display = "block";
+            })
+            
+            login.addEventListener("submit", (ev) => {
+                ev.preventDefault()
+                email = ev.target.childNodes[3].value
+                password = ev.target.childNodes[9].value
+                user = email.split("@")[0]
+                
+                firebase_ref.on("value", function(snap) {
+                    val = snap.val()["Users"][user]
+
+                    if(val !== undefined){ 
+                        pass = val["password"]
+                        if(password !== pass){
+                            alert("Incorrect Password")
+                        }
+                        else{
+                            name = val["name"]
+                            login_form.style.display = "none"
+                            main_page.style.display = "flex"
+                        }
+                    }
+                    else{
+                        alert("Username does not exist")
+                    }
+                })
+            })
+
+            register.addEventListener("submit", (ev) => {
+                ev.preventDefault()
+                name = ev.target.childNodes[3].value
+                email = ev.target.childNodes[9].value
+                user = email.split("@")[0]
+                password = ev.target.childNodes[15].value
+                check_pass = ev.target.childNodes[21].value
+                if (password !== check_pass){
+                    alert("Passwords do not match.")
+                }
+                else{
+                    firebase_ref.child("Users").child(user).child("name").set(name)
+                    firebase_ref.child("Users").child(user).child("email").set(email)
+                    firebase_ref.child("Users").child(user).child("password").set(password)
+                    register_form.style.display = 'none'
+                    card_info.style.display = "block"
+                }   
+            })
+
+            card_details.addEventListener("submit", (ev)=>{
+                ev.preventDefault()
+                num = ev.target.childNodes[3].value
+                exp_month = ev.target.childNodes[5].value
+                exp_year = ev.target.childNodes[7].value
+                cvv = ev.target.childNodes[9].value
+
+                firebase_ref.child("Users").child(user).child("Card").child("Number").set(num)
+                firebase_ref.child("Users").child(user).child("Card").child("Expiry Month").set(exp_month)
+                firebase_ref.child("Users").child(user).child("Card").child("Expiry Year").set(exp_year)
+                firebase_ref.child("Users").child(user).child("Card").child("CVV").set(cvv)
+
+                card_info.style.display = "none"
+                main_page.style.display = "flex"
+            })
+        </script>
+    </body>
+</html>
+
+

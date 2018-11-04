@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Login</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <style>
+        html,
+        body {
+            background: #efefef;
+            padding: 10px;
+            font-family: 'Varela Round';
+        }
+
+        .login-form-1, .registration-form-1, .col-50{
+            margin-top: 150px;
+        }
+
+        .txt{
+            border: 1px solid black;
+            font-size: 150%;
+            font-family: Fauna One;
+            color: black;
+            font-weight: 200;
+            width: 20%;
+            outline: #999;
+        }
+
+        u{
+            cursor: pointer;
+        }
+
+        .col-50{
+            font-family: Arial;
+            font-size: 17px;
+            padding: 8px;
+            -ms-flex: 50%; /* IE10 */
+            flex: 50%;
+            padding: 0 16px;
+            border: 1px solid #eee;
+            width: 40%;
+        }
+
+        .col-50 input[type=text] {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+
+    </style>
+    </head>
+
+    <body>
+        <center>
+            <div class="login-form-1" style = "display:block" id = "login">
+                <form id="login-form">
+                    <h1>Log In</h1>
+                    <input type = "text" class = "txt" name = "email" placeholder="email">
+                    <br>
+                    <br>
+                    
+                    <input type = "password" class = "txt" name = "password" placeholder = "password">
+                    <br>
+                    <br>
+                    <button type = "submit"  class = "btn btn-secondary btn-lg"> Log In </button> 
+                </form>
+                <br>
+                <p> Don't have an account? <u id = "swap"> Register here </u> <p> 
+            </div>
+
+            <div class="registration-form-1" id = "register" stye = "display: none">
+                <form id="registration-form">
+                    <h1>Register</h1>
+                    <input type = "text" class = "txt" name = "name" placeholder="Full Name" required>
+                    <br>
+                    <br>
+                        
+                    <input type = "email" class = "txt" name = "email" placeholder = "Email" required>
+                    <br>
+                    <br>
+
+                    <input type = "password" class = "txt" name = "email" placeholder = "Enter Password" required>
+                    <br>
+                    <br>
+
+                    <input type = "password" class = "txt" name = "email" placeholder = "Confirm Password" required>
+                    <br>
+                    <br>
+                    <button type = "submit"  class = "btn btn-secondary btn-lg"> Create Account </button> 
+                </form>
+            </div>
+
+            <div class="col-50" id = "card-info" style = "display:none">
+                <form id = "card_details">
+                    <h3>Payment Info</h3>
+                    <input type="text" id="ccnum" name="cardnumber" placeholder="Card Number" required>
+                    <input type="text" id="expmonth" name="expmonth" placeholder="Exp. Month" required>
+                    <input type="text" id="expyear" name="expyear" placeholder="Exp. Year" required>
+                    <input type="text" id="cvv" name="cvv" placeholder="CVV" required>
+                    <button type = "submit" class="btn btn-secondary"> Checkout </button>
+                    
+                </form>
+            </div>
+
+        </center>
+
+        <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+
+        <script>
+            // Initialize Firebase
+            const config = {
+                apiKey: "AIzaSyARSBxwifCThlRIHQ1bDPa5h_k6e-h9VF0",
+                authDomain: "brobet-221407.firebaseapp.com",
+                databaseURL: "https://brobet-221407.firebaseio.com",
+                projectId: "brobet-221407",
+                storageBucket: "brobet-221407.appspot.com",
+                messagingSenderId: "890326864452"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <script>
+            const firebase_ref = firebase.database().ref()
+
+            swap = document.getElementById("swap")
+            login_form = document.getElementById("login")
+            register_form = document.getElementById("register")
+
+            let user = ""
+
+            register_form.style.display = "none"
+
+            card_info = document.getElementById("card-info")
+            card_details = document.getElementById("card_details")
+
+            register = document.getElementById("registration-form")
+            login = document.getElementById("login-form")
+            
+            swap.addEventListener("click", (ev)=>{
+                login_form.style.display = "none";
+                register_form.style.display = "block";
+            })
+            
+            login.addEventListener("submit", (ev) => {
+                ev.preventDefault()
+                email = ev.target.childNodes[3].value
+                password = ev.target.childNodes[9].value
+                user = email.split("@")[0]
+                
+                firebase_ref.on("value", function(snap) {
+                    val = snap.val()["Users"][user]
+
+                    if(val !== undefined){ 
+                        pass = val["password"]
+                        if(password !== pass){
+                            alert("Incorrect Password")
+                        }
+                        else{
+                            window.location.href = "index.html"
+                        }
+                    }
+                    else{
+                        alert("Username does not exist")
+                    }
+                });
+            })
+
+            register.addEventListener("submit", (ev) => {
+                ev.preventDefault()
+                name = ev.target.childNodes[3].value
+                email = ev.target.childNodes[9].value
+                user = email.split("@")[0]
+                password = ev.target.childNodes[15].value
+                check_pass = ev.target.childNodes[21].value
+                if (password !== check_pass){
+                    alert("Passwords do not match.")
+                }
+                else{
+                    firebase_ref.child("Users").child(user).child("name").set(name)
+                    firebase_ref.child("Users").child(user).child("email").set(email)
+                    firebase_ref.child("Users").child(user).child("password").set(password)
+                    register_form.style.display = 'none'
+                    card_info.style.display = "block"
+                }   
+            })
+
+            card_details.addEventListener("submit", (ev)=>{
+                ev.preventDefault()
+                num = ev.target.childNodes[3].value
+                exp_month = ev.target.childNodes[5].value
+                exp_year = ev.target.childNodes[7].value
+                cvv = ev.target.childNodes[9].value
+
+                firebase_ref.child("Users").child(user).child("Card").child("Number").set(num)
+                firebase_ref.child("Users").child(user).child("Card").child("Expiry Month").set(exp_month)
+                firebase_ref.child("Users").child(user).child("Card").child("Expiry Year").set(exp_year)
+                firebase_ref.child("Users").child(user).child("Card").child("CVV").set(cvv)
+
+                window.location.href = "index.html"
+            })
+        </script>
+    </body>
+</html>
